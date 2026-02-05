@@ -1,0 +1,21 @@
+param envName string
+param location string = resourceGroup().location
+param customerId string
+param sharedKey string
+
+resource acaEnv 'Microsoft.Web/kubeEnvironments@2023-05-01' = {
+  name: envName
+  location: location
+  properties: {
+    internalLoadBalancerEnabled: true
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: customerId
+        sharedKey: sharedKey
+      }
+    }
+  }
+}
+
+output acaEnvId string = acaEnv.id
