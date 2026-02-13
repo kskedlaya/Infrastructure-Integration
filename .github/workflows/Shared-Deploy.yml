@@ -1,0 +1,63 @@
+name: Shared Bicep Deployment
+
+on:
+  workflow_call:
+    inputs:
+      resourceGroup:
+        required: true
+        type: string
+      location:
+        required: true
+        type: string
+      templateFile:
+        required: true
+        type: string
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_TENANT_ID:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+    outputs:
+      deploymentOutput:
+        description: "Outputs from the Bicep deployment"
+        value: ${{ jobs.deploy.outputs.deploymentOutput }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      deploymentOutput: ${{ steps.deploy-bicep.outputs.deploymentOutput }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Install Bicep
+      run: |
+        az bicep install
+        az bicep upgrade
+
+    - name: Create Resource Group
+      run: |
+        az group create \
+          --name ${{ inputs.resourceGroup }} \
+          --location ${{ inputs.location }}
+
+    - name: Deploy Bicep
+      id: deploy-bicep
+      run: |
+        output=$(az deployment group create \
+          --resource-group ${{ inputs.resourceGroup }} \
+          --template-file ${{ inputs.templateFile }} \
+          --query properties.outputs)
+
+        echo "deploymentOutput=$output" >> $GITHUB_OUTPUT
