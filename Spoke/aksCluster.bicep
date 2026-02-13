@@ -49,11 +49,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
 
     enableRBAC: true
 
-    securityProfile: {
-      encryptionAtHost: true
-    }
-
-    networkProfile: {
+      networkProfile: {
       networkPlugin: 'azure'
       networkPolicy: 'azure'
       serviceCidrs: [
