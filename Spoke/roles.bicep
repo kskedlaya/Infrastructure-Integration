@@ -1,9 +1,15 @@
 param principalId string
 param acrId string
 
+var acrName = last(split(acrId, '/'))
+
+resource acr 'Microsoft.ContainerRegistry/registries@2023-11-01-preview' existing = {
+  name: acrName
+}
+
 resource acrPull 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(acrId, principalId, 'acrpull')
-  scope: acrId
+  name: guid(acr.id, principalId, 'acrpull')
+  scope: acr
   properties: {
     roleDefinitionId: subscriptionResourceId(
       'Microsoft.Authorization/roleDefinitions',
