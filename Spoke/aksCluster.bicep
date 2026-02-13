@@ -21,8 +21,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
 
     apiServerAccessProfile: {
       authorizedIPRanges: [
-        'x.x.x.x/32'
-        'y.y.y.y/32'
+        '0.0.0.0/0'
       ]
     }
 
