@@ -12,7 +12,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
   }
 
   properties: {
-    disableLocalAccounts: true
+    disableLocalAccounts: false
     dnsPrefix: '${aksName}-dns'
 
     autoUpgradeProfile: {
