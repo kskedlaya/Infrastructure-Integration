@@ -19,12 +19,6 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
       upgradeChannel: 'stable'
     }
 
-    apiServerAccessProfile: {
-      authorizedIPRanges: [
-        '0.0.0.0/0'
-      ]
-    }
-
     addonProfiles: {
       azureKeyvaultSecretsProvider: {
         enabled: true
@@ -49,7 +43,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
 
     enableRBAC: true
 
-      networkProfile: {
+    networkProfile: {
       networkPlugin: 'azure'
       networkPolicy: 'azure'
       serviceCidrs: [
