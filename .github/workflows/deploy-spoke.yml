@@ -9,7 +9,7 @@ on:
 
 jobs:
   orchestrator:
-    uses: ./.github/workflows/shared-deploy-bicep.yml
+    uses: ./.github/workflows/Shared-Deploy.yml@${{ github.ref }}
     with:
       resourceGroup: rg-orchestrator
       location: canadacentral
