@@ -25,8 +25,8 @@ on:
         value: ${{ jobs.deploy.outputs.deploymentOutput }}
 
 permissions:
-  id-token: write        # REQUIRED for Azure OIDC
-  contents: read         # REQUIRED for checkout + OIDC
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
