@@ -9,7 +9,7 @@ on:
 
 jobs:
   orchestrator:
-    uses: ./.github/workflows/Shared-Deploy.yml@${{ github.ref }}
+    uses: ./.github/workflows/Shared-Deploy.yml@v1
     with:
       resourceGroup: rg-orchestrator
       location: canadacentral
