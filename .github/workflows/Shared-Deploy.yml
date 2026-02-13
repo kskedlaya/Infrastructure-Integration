@@ -24,6 +24,10 @@ on:
         description: "Outputs from the Bicep deployment"
         value: ${{ jobs.deploy.outputs.deploymentOutput }}
 
+permissions:
+  id-token: write        # REQUIRED for Azure OIDC
+  contents: read         # REQUIRED for checkout + OIDC
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

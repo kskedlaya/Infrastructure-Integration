@@ -7,6 +7,10 @@ on:
       - main
       - dev
 
+permissions:
+  id-token: write        # REQUIRED for Azure OIDC
+  contents: read         # REQUIRED for checkout + OIDC
+
 jobs:
   orchestrator:
     uses: ./.github/workflows/Shared-Deploy.yml
