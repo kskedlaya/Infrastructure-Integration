@@ -22,4 +22,12 @@ on:
     outputs:
       deploymentOutput:
         description: "Outputs from the Bicep deployment"
-        value: ${{ jobs.deploy
+        value: ${{ jobs.deploy.outputs.deploymentOutput }}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
