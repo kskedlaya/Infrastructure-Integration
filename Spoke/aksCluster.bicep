@@ -46,6 +46,11 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
     networkProfile: {
       networkPlugin: 'azure'
       networkPolicy: 'azure'
+
+      podCidrs: [
+        '10.3.0.0/16'
+      ]
+
       serviceCidrs: [
         '10.2.0.0/24'
       ]
