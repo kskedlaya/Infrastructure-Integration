@@ -73,7 +73,6 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
         maxPods: 50
 
         // Required for encryptionAtHost to work
-        enableEncryptionAtHost: true
       }
     ]
   }
