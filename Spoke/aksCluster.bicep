@@ -56,7 +56,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-01' = {
       ]
       dnsServiceIP: '10.2.0.10'
       loadBalancerSku: 'standard'
-      outboundType: 'userDefinedRouting'
+      outboundType: 'loadBalancer'
     }
 
     agentPoolProfiles: [
